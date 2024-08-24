@@ -17,13 +17,31 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(221, 39%, 11%, 1) 25%,
+    hsla(215, 28%, 17%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(221, 39%, 11%, 1) 25%,
+    hsla(215, 28%, 17%, 1) 100%
+  );
+
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1b2432 #111827;
 }
 
 @layer utilities {
