@@ -1,9 +1,9 @@
 "use client";
 
-
 import { useState } from "react";
 import CustomInput from "../{components}/CustomInput/CustomInput";
 import RichTextEditor from "../{components}/RichText/Rischtext";
+import CreateBuild from "../{components}/createBuild/CreateBuild";
 
 export default function Admin() {
   const [value, setValue] = useState<string>("");
@@ -21,14 +21,8 @@ export default function Admin() {
         />
         <RichTextEditor value={value} onChange={handleChange} />
       </section>
-      <div>
-        <div className='ql-snow'>
-        <div
-            className="ql-editor"
-            dangerouslySetInnerHTML={{ __html: value }}
-          />
-        </div>
-
+      <div className="flex justify-center items-center">
+        <CreateBuild />
       </div>
     </main>
   );
