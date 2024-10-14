@@ -1,11 +1,12 @@
+import { API_URL } from "@/config/constants";
+
 export const getAll = async (builds: string) => {
   try {
     const response = await fetch(
-      `https://api.mpecsko.io/albion-builds-api/${builds}`,
+      `${API_URL}/${builds}`,
       { cache: "no-store" }
     );
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     console.log(error);
@@ -13,27 +14,25 @@ export const getAll = async (builds: string) => {
 };
 
 export const getItem = async (category: string, search?: string) => {
-  let url = `https://api.mpecsko.io/albion-builds-api/items?category=${category}`;
+  let url = `${API_URL}/items?category=${category}`;
 
   if (search) {
     search = search.toLowerCase();
-    url = `https://api.mpecsko.io/albion-builds-api/items?category=${category}&keyword=${search}`;
+    url = `${API_URL}/items?category=${category}&keyword=${search}`;
   }
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(url);
     return data;
   } catch (error) {
     console.log(error);
-    console.log(url);
   }
 };
 
 export const createBuild = async (buildData: any) => {
   try {
     const response: any = await fetch(
-      `https://api.mpecsko.io/albion-builds-api/builds`,
+      `${API_URL}/builds`,
       {
         method: "POST",
         headers: {
@@ -52,10 +51,9 @@ export const createBuild = async (buildData: any) => {
 
 
 export const getSingleBuild = async (buildID: string) => {
- console.log(buildID)
   try {
     const response = await fetch(
-      `https://api.mpecsko.io/albion-builds-api/builds/${buildID}`
+      `${API_URL}/builds/${buildID}`, { cache: 'no-cache' }
     );
     const data = await response.json();
     return data;

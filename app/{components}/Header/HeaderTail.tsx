@@ -15,7 +15,7 @@ type Props = {
 
 export default function HeaderTail({ searchBuild, handleSearchBuild, handleCategory }: Props) {
   const path = usePathname();
-  console.log(path);
+
   return (
     <header className="bg-dark-blue sticky top-0 z-50 w-full">
       <div
