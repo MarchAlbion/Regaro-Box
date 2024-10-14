@@ -1,16 +1,25 @@
+import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   weaponUrl: string;
   buildTitle: string;
   category: string;
+  buildID: string;
 };
 
-export default function Build({ weaponUrl, buildTitle, category }: Props) {
+export default function Build({
+  weaponUrl,
+  buildTitle,
+  category,
+  buildID,
+}: Props) {
   const backgroundClass = `bg-[url('/${category}.png')]`;
 
   return (
-    <div
+    <Link
+      href={`/${buildID}`}
       style={{
         backgroundImage: `url('/${category}.png')`,
       }}
@@ -28,6 +37,6 @@ export default function Build({ weaponUrl, buildTitle, category }: Props) {
       <div className="flex justify-center items-center px-5 bg-gradient-to-r from-slate-700 to-slate-500 text-white rounded-r-lg text-[10px] w-[20%]">
         {category.toUpperCase()}
       </div>
-    </div>
+    </Link>
   );
 }

@@ -27,8 +27,8 @@ export default function HeaderTail({ searchBuild, handleSearchBuild, handleCateg
         </div>
 
         <div className="md:flex w-full items-cente justify-center">
-          {path === "/admin" ? (
-            <div>ADMIN PAGE</div>
+          {path !== "/" ? (
+            <div></div>
           ) : (
             <>
               <CustomInput placeholder="Search for build" value={searchBuild} onChange={(e) => handleSearchBuild(e.target.value)} />

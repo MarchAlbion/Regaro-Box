@@ -11,6 +11,10 @@ const config: Config = {
       colors: {
         "dark-blue": "#111827",
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',  
+        'spin-slower': 'spin 6s linear infinite', 
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

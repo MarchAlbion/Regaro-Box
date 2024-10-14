@@ -48,3 +48,18 @@ export const createBuild = async (buildData: any) => {
     console.log(error);
   }
 };
+
+
+
+export const getSingleBuild = async (buildID: string) => {
+ console.log(buildID)
+  try {
+    const response = await fetch(
+      `https://api.mpecsko.io/albion-builds-api/builds/${buildID}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
