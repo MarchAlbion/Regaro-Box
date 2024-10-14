@@ -138,6 +138,12 @@ export default function Admin() {
       offHandSlot: {
         item: (selectedBuildItems.off as Item)._id,
       },
+      potionSlot: {
+        item: (selectedBuildItems.potions as Item)._id
+      },
+      mealSlot: {
+        item: (selectedBuildItems.meal as Item)._id
+      }
     };
     const res = await createBuild(data);
   }

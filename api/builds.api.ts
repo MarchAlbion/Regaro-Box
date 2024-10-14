@@ -1,5 +1,8 @@
+import { API_URL } from "@/config/constants";
+
 export enum BuildCategory {
   SOLO_PVE = "solo_pve",
+  SOLO_PVP = "solo_pvp",
   MISTS = "mists",
   CORRUPTED = "corrupted",
   GANK = "gank",
@@ -9,6 +12,7 @@ export enum BuildCategory {
   HCE = "hce",
   CRYSTAL_ARENA = "crystal_arena",
   AVALONIAN_DUNGEON = "avalonian_dungeon",
+  AVALONIAN_ROADS = "avalonian_roads",
   TRACKING = "tracking",
   GATHERING = "gathering",
 }
@@ -36,7 +40,7 @@ export async function searchBuilds(searchCriteria?: SearchBuildsInput) {
     console.log(searchCriteria, searchQuery);
 
     const response = await fetch(
-      `https://api.mpecsko.io/albion-builds-api/builds${searchQuery}`,
+      `${API_URL}/builds${searchQuery}`,
       { cache: "no-store" }
     );
     const data = await response.json();

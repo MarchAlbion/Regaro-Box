@@ -15,6 +15,7 @@ export default function Build() {
   useEffect(() => {
     const fetchBuild = async () => {
       const build = await getSingleBuild(buildId as string);
+      console.log({ build });
       setBuild(build);
     };
 
@@ -140,7 +141,7 @@ export default function Build() {
                       <div className="flex-1">{`Offhand: ${build.offHandSlot?.item.name.EN}`}</div>
                     )}
                     <div className="flex-1">{`Meal: ${build.mealSlot?.item.name.EN}`}</div>
-                    <div className="flex-1">{`Potion: ${build.potions?.item.name.EN}`}</div>
+                    <div className="flex-1">{`Potion: ${build.potionSlot?.item.name.EN}`}</div>
                     <div className="flex-1">{`Boots: ${build.bootsSlot?.item.name.EN}`}</div>
                   </motion.div>
                 )}
