@@ -27,7 +27,6 @@ export const PickSpells = ({text, handleSpells }: Props) => {
 
   const handleClick = (id: number) => {
     setSelectedSpell(id);
-    console.log(id);
     handleSpells(text,id.toString());
   };
   return (

@@ -5,7 +5,6 @@ export const getAll = async (builds: string) => {
       { cache: "no-store" }
     );
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     console.log(error);
@@ -22,11 +21,9 @@ export const getItem = async (category: string, search?: string) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(url);
     return data;
   } catch (error) {
     console.log(error);
-    console.log(url);
   }
 };
 
@@ -52,7 +49,6 @@ export const createBuild = async (buildData: any) => {
 
 
 export const getSingleBuild = async (buildID: string) => {
- console.log(buildID)
   try {
     const response = await fetch(
       `https://api.mpecsko.io/albion-builds-api/builds/${buildID}`

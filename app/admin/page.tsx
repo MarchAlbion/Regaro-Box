@@ -39,7 +39,6 @@ export default function Admin() {
   });
 
   const [selectedCategory, setSelectedCategory] = useState("");
-  console.log("Category", selectedCategory);
 
   const handleBuildItem = (item: Item) => {
     if (item.category === "head") {
@@ -66,7 +65,6 @@ export default function Admin() {
     if (item.category === "shoes") {
       setSelectedBuildItems({ ...selectedBuildItems, shoes: item });
     }
-    console.log("seleCTED BUILD ITEMS", selectedBuildItems);
   };
 
   const handleSpells = (spell: string | undefined, id: string) => {
@@ -88,12 +86,10 @@ export default function Admin() {
     if (spell === "F") {
       setSelectedSpells({ ...selectedSpells, f: id });
     }
-    console.log("seleCTED SPELLS", selectedSpells);
   };
 
   const handleChange = (value: string) => {
     setRichtextValue(value);
-    console.log(value);
   };
   const handleAdminToken = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -114,8 +110,6 @@ export default function Admin() {
   };
 
   async function handleCreateBuild() {
-    console.log("Create Build");
-
     const data = {
       title: inputValue,
       category: selectedCategory,
@@ -145,9 +139,7 @@ export default function Admin() {
         item: (selectedBuildItems.off as Item)._id,
       },
     };
-    console.log(data);
     const res = await createBuild(data);
-    console.log(res);
   }
 
   return auth === true ? (

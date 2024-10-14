@@ -11,7 +11,6 @@ export default function Build() {
   const buildId = params.build;
   const [build, setBuild] = useState<any>(null);
   const [isActive, setIsActive] = useState(false);
-  console.log(build);
 
   useEffect(() => {
     const fetchBuild = async () => {
