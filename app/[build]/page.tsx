@@ -102,20 +102,20 @@ export default function Build() {
                 </div>
                 <div className="flex flex-row items-center justify-center">
                   <Image
-                    src={build.headSlot.item.url}
+                    src={build.mealSlot.item.url}
                     alt="nevermind"
                     width={100}
                     height={100}
-                    className="opacity-0"
+                    
                   />
                   <Image
-                    src={build.headSlot.item.url}
+                    src={build.bootsSlot.item.url}
                     alt="helmet"
                     width={100}
                     height={100}
                   />
                   <Image
-                    src={build.capeSlot.item.url}
+                    src={build.potionSlot.item.url}
                     alt="cape"
                     width={100}
                     height={100}

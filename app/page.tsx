@@ -4,8 +4,8 @@ import Build from "./{components}/buildComponent/Build";
 import { BuildType, Item } from "./{types}/buildTypes";
 import { getAll } from "./{utils}/api";
 import { useSearchParams } from "next/navigation";
-import { filterBuilds } from "./{utils}/filterBuilds";
 import { BuildCategory, searchBuilds } from "@/api/builds.api";
+import { getCategory } from "./{utils}/getCategory";
 
 export default function Home() {
   const [builds, setBuilds] = useState<BuildType[]>([]);
@@ -33,7 +33,7 @@ export default function Home() {
   }, [fetchPageData]);
 
   return (
-    <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5 max-w-[100vw]">
+    <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5 max-w-[100vw] pt-4 pb-4">
       {builds.map((build: BuildType) => (
         <Build
           buildID={build._id}
@@ -43,7 +43,7 @@ export default function Home() {
               ?.url
           }
           buildTitle={build.title}
-          category={build.category}
+          category={getCategory(build.category)}
         />
       ))}
     </main>
