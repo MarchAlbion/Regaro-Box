@@ -68,6 +68,35 @@ export const armorOption = [
   "garb",
 ];
 
+export const slotBySpellCategory = (
+  spells: SkillWithCategory[],
+  category: string
+): SkillWithCategory[] => {
+  const armorCategories: Record<string, string> = {
+    shoes: "bootsSlot",
+    boots: "bootsSlot",
+    sandals: "bootsSlot",
+    hood: "headSlot",
+    helmet: "headSlot",
+    cowl: "headSlot",
+    robe: "chestSlot",
+    jacket: "chestSlot",
+    armor: "chestSlot",
+    workboots: "bootsSlot",
+    cap: "headSlot",
+    garb: "chestSlot",
+  };
+
+  return spells.filter((spell) => {
+    if (category === "mainHandSlot" && weaponOption.includes(spell.category))
+      return true;
+
+    if (armorCategories[spell.category] === category) return true;
+
+    return false;
+  });
+};
+
 export const armorSpells = {
   shoes: {
     passive: [

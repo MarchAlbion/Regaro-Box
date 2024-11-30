@@ -14,6 +14,7 @@ import {
   armorSpells,
   Skill,
   SkillWithCategory,
+  slotBySpellCategory,
   weaponOption,
   weaponSpells,
 } from "../{utils}/spells";
@@ -106,20 +107,25 @@ export default function Admin() {
       description: richtextValue,
       mainHandSlot: {
         item: (selectedBuildItems.weapon as Item)._id,
-        
-
+        skills: slotBySpellCategory(
+          spells as SkillWithCategory[],
+          "mainHandSlot"
+        ),
       },
       capeSlot: {
         item: (selectedBuildItems.cape as Item)._id,
       },
       headSlot: {
         item: (selectedBuildItems.head as Item)._id,
+        skills: slotBySpellCategory(spells as SkillWithCategory[], "headSlot"),
       },
       bootsSlot: {
         item: (selectedBuildItems.shoes as Item)._id,
+        skills: slotBySpellCategory(spells as SkillWithCategory[], "bootsSlot"),
       },
       chestSlot: {
         item: (selectedBuildItems.armor as Item)._id,
+        skills: slotBySpellCategory(spells as SkillWithCategory[], "chestSlot"),
       },
       offHandSlot: {
         item: (selectedBuildItems.off as Item)._id,
@@ -130,7 +136,6 @@ export default function Admin() {
       mealSlot: {
         item: (selectedBuildItems.meal as Item)._id,
       },
-      spells: spells,
     };
     const res = await createBuild(data);
     console.log("response", res);
