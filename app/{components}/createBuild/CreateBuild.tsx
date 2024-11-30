@@ -3,6 +3,7 @@ import { getAll } from "@/app/{utils}/api";
 import CreateBuildAddItem from "./CreateBuildAddItem";
 import { useEffect, useState } from "react";
 import { Item } from "@/app/{types}/buildTypes";
+
 type Props = {
   handleBuildItem: (item: Item) => void;
 };
@@ -24,6 +25,8 @@ export default function CreateBuild({handleBuildItem}: Props) {
   const offhand = items.filter((item: Item) => item.category === "off");
   const food = items.filter((item: Item) => item.category === "meal");
   const shoes = items.filter((item: Item) => item.category === "shoes");
+
+  console.log(weapon)
 
   return (
     <div className="w-80 h-96 flex justify-center items-center mt-6  bg-dark-blue opacity-200 rounded-lg shadow-lg flex-col">

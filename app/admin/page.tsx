@@ -1,15 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { act, useState } from "react";
 import CustomInput from "../{components}/CustomInput/CustomInput";
 import RichTextEditor from "../{components}/RichText/Rischtext";
 import CreateBuild from "../{components}/createBuild/CreateBuild";
 import { password } from "../{utils}/adminToken";
 import { Button } from "../{components}/Button/Button";
-import { PickSpells } from "../{components}/PickSpellsComponent/PickSpells";
 import { buidItems, Item } from "../{types}/buildTypes";
 import CustomSelect from "../{components}/CustomSelect/CustomSelect";
 import { createBuild } from "../{utils}/api";
+import {
+  armorOption,
+  armorSpells,
+  Skill,
+  SkillWithCategory,
+  weaponOption,
+  weaponSpells,
+} from "../{utils}/spells";
+import SelectSpell from "../{components}/CustomSelect/SelectSpell";
+import ToggleCategory from "../{components}/Toggle/ToggleCategory";
+import SelectItemType from "../{components}/CustomSelect/SelectWeaponType";
 
 export default function Admin() {
   const [richtextValue, setRichtextValue] = useState<string>("");
@@ -17,6 +27,9 @@ export default function Admin() {
   const [auth, setAuth] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
+  const [selectedItemCategory, setSelectedItemCategory] =
+    useState<string>("sword");
+  console.log(selectedItemCategory);
 
   const [selectedBuildItems, setSelectedBuildItems] = useState<buidItems>({
     head: "",
@@ -29,16 +42,13 @@ export default function Admin() {
     shoes: "",
   });
 
-  const [selectedSpells, setSelectedSpells] = useState({
-    q: "",
-    w: "",
-    e: "",
-    r: "",
-    d: "",
-    f: "",
-  });
+  const [spells, setSpells] = useState<SkillWithCategory[] | Skill[]>([]);
 
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleWeaponType = (value: string) => {
+    setSelectedItemCategory(value);
+  };
 
   const handleBuildItem = (item: Item) => {
     if (item.category === "head") {
@@ -67,27 +77,7 @@ export default function Admin() {
     }
   };
 
-  const handleSpells = (spell: string | undefined, id: string) => {
-    if (spell === "Q") {
-      setSelectedSpells({ ...selectedSpells, q: id });
-    }
-    if (spell === "W") {
-      setSelectedSpells({ ...selectedSpells, w: id });
-    }
-    if (spell === "E") {
-      setSelectedSpells({ ...selectedSpells, e: id });
-    }
-    if (spell === "R") {
-      setSelectedSpells({ ...selectedSpells, r: id });
-    }
-    if (spell === "D") {
-      setSelectedSpells({ ...selectedSpells, d: id });
-    }
-    if (spell === "F") {
-      setSelectedSpells({ ...selectedSpells, f: id });
-    }
-  };
-
+  const [enabled, setEnabled] = useState(false);
   const handleChange = (value: string) => {
     setRichtextValue(value);
   };
@@ -116,36 +106,34 @@ export default function Admin() {
       description: richtextValue,
       mainHandSlot: {
         item: (selectedBuildItems.weapon as Item)._id,
-        active_skill_one: selectedSpells.q,
-        active_skill_two: selectedSpells.w,
-        active_skill_three: selectedSpells.e,
+        
+
       },
       capeSlot: {
         item: (selectedBuildItems.cape as Item)._id,
       },
       headSlot: {
         item: (selectedBuildItems.head as Item)._id,
-        active_skill: selectedSpells.d,
       },
       bootsSlot: {
         item: (selectedBuildItems.shoes as Item)._id,
-        active_skill: selectedSpells.f,
       },
       chestSlot: {
         item: (selectedBuildItems.armor as Item)._id,
-        active_skill: selectedSpells.r,
       },
       offHandSlot: {
         item: (selectedBuildItems.off as Item)._id,
       },
       potionSlot: {
-        item: (selectedBuildItems.potions as Item)._id
+        item: (selectedBuildItems.potions as Item)._id,
       },
       mealSlot: {
-        item: (selectedBuildItems.meal as Item)._id
-      }
+        item: (selectedBuildItems.meal as Item)._id,
+      },
+      spells: spells,
     };
     const res = await createBuild(data);
+    console.log("response", res);
   }
 
   return auth === true ? (
@@ -174,13 +162,39 @@ export default function Admin() {
       <div className="flex flex-row justify-center items-center gap-5 lg:flex-col">
         <CreateBuild handleBuildItem={handleBuildItem} />
         <div className="flex-col text-white">
-          <div className="mb-2"> Select Active Spells:</div>
-          <PickSpells text="Q" handleSpells={handleSpells} />
-          <PickSpells text="W" handleSpells={handleSpells} />
-          <PickSpells text="E" handleSpells={handleSpells} />
-          <PickSpells text="R" handleSpells={handleSpells} />
-          <PickSpells text="D" handleSpells={handleSpells} />
-          <PickSpells text="F" handleSpells={handleSpells} />
+          <div className="flex flex-row  items-center gap-2">
+            <span
+              className={`text-xs ${
+                !enabled ? "text-green-600" : "text-gray-500"
+              }`}
+            >
+              Weapon
+            </span>
+            <ToggleCategory
+              enabled={enabled}
+              setEnabled={setEnabled}
+              setSelectedItemCategory={setSelectedItemCategory}
+            />
+            <span
+              className={`text-xs ${
+                enabled ? "text-green-600" : "text-gray-500"
+              }`}
+            >
+              Armor
+            </span>
+          </div>
+
+          <SelectItemType
+            options={enabled ? armorOption : weaponOption}
+            value={selectedItemCategory}
+            onChange={handleWeaponType}
+          />
+          <SelectSpell
+            allSpells={enabled ? armorSpells : weaponSpells}
+            category={selectedItemCategory}
+            setSpells={setSpells}
+            spells={spells}
+          />
         </div>
       </div>
     </main>
