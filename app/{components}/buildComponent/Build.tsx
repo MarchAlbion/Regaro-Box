@@ -1,4 +1,3 @@
-import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -16,8 +15,6 @@ export default function Build({
   category,
   buildID,
 }: Props) {
-  const backgroundClass = `bg-[url('/${category}.png')]`;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}

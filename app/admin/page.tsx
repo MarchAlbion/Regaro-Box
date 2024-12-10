@@ -1,6 +1,6 @@
 "use client";
 
-import { act, useState } from "react";
+import { useState } from "react";
 import CustomInput from "../{components}/CustomInput/CustomInput";
 import RichTextEditor from "../{components}/RichText/Rischtext";
 import CreateBuild from "../{components}/createBuild/CreateBuild";
@@ -21,6 +21,8 @@ import {
 import SelectSpell from "../{components}/CustomSelect/SelectSpell";
 import ToggleCategory from "../{components}/Toggle/ToggleCategory";
 import SelectItemType from "../{components}/CustomSelect/SelectWeaponType";
+import { motion } from "framer-motion";
+import { DeleteBuild } from "../{components}/DeleteBuild/DeleteBuild";
 
 export default function Admin() {
   const [richtextValue, setRichtextValue] = useState<string>("");
@@ -154,6 +156,7 @@ export default function Admin() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
+          <DeleteBuild />
         </div>
         <RichTextEditor value={richtextValue} onChange={handleChange} />
         <div className="mt-5">
@@ -162,6 +165,34 @@ export default function Admin() {
             type="submit"
             onClick={handleCreateBuild}
           />
+        </div>
+        <div className="flex-col justify-start w-2/4 mt-10">
+          <div className="text-green-700 mb-2">All selected Spells</div>
+          <div className="grid grid-cols-7 ">
+            {spells.length > 0 ? (
+              spells.map((s) => {
+                return (
+                  <div key={s.name}>
+                    {" "}
+                    <img src={s.url} alt={s.name} className="w-12 h-12" />{" "}
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-red-700">Empty</div>
+            )}
+          </div>
+          {spells.length > 0 && (
+            <div className="flex justify-start items-center mt-5">
+              <Button
+                text="Delete Spells"
+                type="submit"
+                onClick={() => setSpells([])}
+                bgColor="bg-red-500"
+                bgHoverColor="hover:bg-red-700"
+              />
+            </div>
+          )}
         </div>
       </section>
       <div className="flex flex-row justify-center items-center gap-5 lg:flex-col">

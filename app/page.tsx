@@ -21,11 +21,6 @@ export default function Home() {
 
     const serverAllItems = await getAll("items");
     setAllItems(serverAllItems);
-    // const builds = filterBuilds(
-    //   allbuilds,
-    //   searchParams.build,
-    //   searchParams.category
-    // );
   }, [buildQuery, categoryQuery]);
 
   useEffect(() => {

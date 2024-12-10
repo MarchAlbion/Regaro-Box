@@ -23,7 +23,7 @@ export default function SelectSpell({
   const uniqueSpells = allSpells[category]?.unique as Skill[] | undefined;
 
   const onSpellClick = (spell: Skill) => {
-    if (spells.includes(spell)) {
+    if (spells.some((s) => s.url === spell.url)) {
       setSpells((prevState) => prevState.filter((s) => s.name !== spell.name));
       console.log("removed");
       return;
@@ -46,7 +46,7 @@ export default function SelectSpell({
             src={spell.url}
             alt={spell.name}
             className={`w-12 h-12 hover:scale-110 transform-transition duration-200 ease-in-out   ${
-              spells.includes(spell) ? "opacity-100" : "opacity-50"
+              spells.some((s) => s.url === spell.url) ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => onSpellClick(spell)}
           />
@@ -58,7 +58,7 @@ export default function SelectSpell({
             src={spell.url}
             alt={spell.name}
             className={`w-12 h-12 hover:scale-110 transform-transition duration-200 ease-in-out  ${
-              spells.includes(spell) ? "opacity-100" : "opacity-50"
+              spells.some((s) => s.url === spell.url) ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => onSpellClick(spell)}
           />
@@ -70,7 +70,7 @@ export default function SelectSpell({
             src={spell.url}
             alt={spell.name}
             className={`w-12 h-12 hover:scale-110 transform-transition duration-200 ease-in-out   ${
-              spells.includes(spell) ? "opacity-100" : "opacity-50"
+             spells.some((s) => s.url === spell.url) ? "opacity-100" : "opacity-50"
             }`}
             onClick={() => onSpellClick(spell)}
           />
